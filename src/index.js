@@ -1,17 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import 'src/styles/index.sass'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import MainPage from './pages/MainPage.js'
+import AboutPage from './pages/AboutPage/AboutPage.js'
+import BenefitsPage from './pages/BenefitsPage/BenefitsPage.js'
+import EmployeesPage from './pages/EmployeesPage/EmployeesPage.js'
+import CoursesPage from './pages/CoursesPage/CoursesPageContainer'
+import Header from './components/Header/Header.js'
+import RoadMap from './components/RoadMap/RoadMap.js'
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  <>
+  {/* <React.StrictMode> */}
+    <Header />
+    <RoadMap />
+    
+    <MainPage />
+    <AboutPage />
+    <BenefitsPage />
+    <EmployeesPage />
+    <CoursesPage />
+  {/* </React.StrictMode> */}
+  </>
+)

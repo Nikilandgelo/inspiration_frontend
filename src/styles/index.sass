@@ -1,0 +1,166 @@
+@import 'basic/_variables'
+@import 'basic/_reset'
+@import 'components/_section'
+@import 'pages/_MainPageStyle'
+@import 'animations/_main_page_anim'
+@import 'components/_header'
+@import 'components/_roadmap'
+@import 'pages/_AboutPageStyle'
+@import 'components/_reveal'
+@import 'pages/_BenefitsPageStyle'
+@import 'pages/_EmployeesPageStyle'
+
+
+[data-fixed_section = 'true']
+    height: 100dvh
+
+
+// /*                              ALL MEDIAS                    */
+// /* по ширине */
+// @media (max-width: 1580px)
+// {
+//   header { width: 40vw !important; }
+//   :root { --smaller_font: 1.35rem !important; }
+// }
+// @media (max-width: 1480px)
+// {
+//   :root { --smaller_font: 1.2rem !important; --bigger_font: 1.85rem !important; }
+// }
+// @media (max-width: 1380px)
+// {
+//   header { width: 45vw !important; }
+//   :root { --smaller_font: 1.05rem !important; --bigger_font: 1.65rem !important; }
+// }
+// @media (max-width: 1279px)
+// {
+//   header { width: 50vw !important; }
+//   :root { --bigger_font: 1.8rem !important; }
+
+//   nav { display: none !important; }
+
+//   .pages_content { width: 100% !important; }
+//   .start_page_content 
+//   {
+//     align-items: center !important;
+//     text-align: center !important;
+//   }
+// }
+// @media (max-width: 1024px)
+// {
+//   html { font-size: 55%; }
+//   header { width: 90vw !important;}
+//   header div { display: none !important; }
+//   #logo_wrapper
+//   {
+//     position: absolute !important;
+//     height: 8vh;
+//     top: 50%;
+//     left: var(--min_w_margin);
+//     transform: translateY(-50%);
+//   }
+//   #header_hamburger { display: block !important; }
+// }
+// @media (max-width: 750px)
+// {
+//   :root { --text_content_font: 2.5rem !important; }
+//   h1 { font-size: 7.5rem; }
+//   h2 { font-size: 6rem; }
+//   #main_page_quote { width: 70% !important; }
+//   #main_page_action 
+//   { 
+//     padding: 1rem !important;
+//     gap: var(--min_w_margin) !important;
+//   }
+// }
+
+// @media (max-width: 645px)
+// { h1 { font-size: 6rem; } h2 { font-size: 4.8rem; }}
+
+// @media (max-width: 521px)
+// { html { font-size: 50%; } }
+
+// @media (max-width: 475px)
+// {
+//   h1 { font-size: 5.1rem; }
+//   h2 { font-size: 4rem; }
+//   :root { --text_content_font: 2.25rem !important; }
+// }
+
+// @media (max-width: 426px)
+// { html {font-size: 45%; } }
+
+// @media (max-width: 386px)
+// {
+//   h1 { font-size: 4.6rem; }
+//   h2 { font-size: 3.6rem; }
+//   #logo_wrapper { left: var(--mid_w_margin); }
+//   #header_hamburger { right: var(--mid_w_margin) !important; }
+// }
+// @media (max-width: 336px)
+// {
+//   :root  { --text_content_font: 2rem !important; }
+//   h1 { font-size: 3.7rem; }
+//   h2 { font-size: 2.9rem; }
+//   #main_page_quote {width: 80% !important; }
+// }
+
+
+
+// /* по высоте */
+// @media (max-height: 850px) and (orientation: landscape)
+// { :root { --height_header: 12vh !important; } }
+
+// @media (max-height: 750px) and (orientation: landscape)
+// {
+//   html { font-size: 55%; }
+//   :root { --height_header: 13vh !important; }
+// }
+// @media (max-height: 750px) and (orientation: landscape) and (max-width: 1024px)
+// {
+//   #header_hamburger { height: 5vh !important; }
+//   #logo_wrapper { height: 9vh !important; }
+// }
+
+// @media (max-height: 650px) and (orientation: landscape)
+// { :root { --height_header: 14vh !important; }}
+
+// @media (max-height: 650px) and (orientation: landscape) and (max-width: 1024px)
+// {
+//   #header_hamburger { height: 6vh !important; }
+//   #logo_wrapper { height: 10vh !important; }
+// }
+
+// @media (max-height: 550px) and (orientation: landscape)
+// {
+//   html { font-size: 50%; }
+//   :root { --height_header: 16vh !important; }
+// }
+// @media (max-height: 550px) and (orientation: landscape) and (max-width: 1024px)
+// {
+//   #header_hamburger { height: 7vh !important; }
+//   #logo_wrapper { height: 11vh !important; }
+// }
+
+// @media (max-height: 450px) and (orientation: landscape)
+// {
+//   html { font-size: 45%; }
+//   :root { --height_header: 18vh !important; --text_content_font: 2.25rem !important; }
+//   h1 { font-size: 5rem !important; }
+//   h2 { font-size: 4rem !important; }
+//   #main_page_action { height: 7vh !important; }
+//   #main_page_arrow_down { height: 2.25vh !important; }
+// }
+
+// @media (min-height: 844px) and (orientation: portrait)
+// {
+//   :root { --height_header: 8.5vh !important; }
+  
+//   /* так как проверка на orientation: portrait я гарантированно знаю, что ширина меньше 844px, а значит они есть */
+//   #header_hamburger { height: 3.5vh !important; }
+//   #logo_wrapper { height: 7.5vh !important; }
+// }
+// @media (min-height: 600px) and (orientation: portrait)
+// {
+//   #main_page_action { height: 4vh !important; }
+//   #main_page_arrow_down { height: 1.75vh !important; }
+// }

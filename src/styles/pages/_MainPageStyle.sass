@@ -1,0 +1,116 @@
+@import '../basic/_variables'
+@import '../basic/_mixins'
+    
+#main_page::before, #main_page::after
+    content: ''
+    @include set_size(102%, 102%)
+    @include postioning($top: -1%, $left: -1%)
+    will-change: transform
+
+/* для затемнения фото/видео, т.к filter: brightness() не работает в Edge */
+#main_page::before
+    background-color: rgba(0, 0, 0, 0.8)
+    z-index: -2
+    
+/* для сливания видео с фоном при скролле */
+#main_page::after
+    transition: background-color $fixed_transition_time
+    background-color: var(--main_page_fadeout)
+    z-index: -1
+
+
+#start_page_content
+    @include set_size(100%, max-content)
+    @include flex_container(column, center)
+    text-align: left
+    gap: $min_v_margin
+
+    span * 
+        display: inline
+
+    #inspiration_title::before
+        content: ''
+        color: $contrast_color
+        animation: typing_text 8s infinite
+
+    #inspiration_title::after
+        content: ''
+        border-left: $border-size solid $contrast_color
+        animation: blink_cursor 1s infinite
+
+    .quote_icon 
+        height: 3dvh
+
+    #main_page_quote 
+        font-size: $text_content_font
+        
+        /* чтобы поближе к иконке */
+        @include postioning(relative, $top: -$extra_min_v_margin)
+
+    #main_page_action
+        @include set_size(max-content, max-content)
+        display: grid
+        grid-template-columns: max-content 1fr
+        grid-template-rows: 100%
+        background-color: $contrast_color
+
+        padding: $extra_min_v_margin $extra_min_w_margin $extra_min_v_margin $extra_min_w_margin
+
+        border-radius: $default_border_radius
+        gap: $super_min_w_margin
+        /* для div svg */
+        position: relative
+        overflow: hidden
+
+        @include interactive_object(                $own_interaction: ('padding-right': $min_w_margin), $other_elements: ('div': ('transform': translateX(-$min_w_margin)), 'svg': ('filter': opacity(100%)))                                                    )
+
+        strong
+            font-size: $text_content_font
+            color: transparent
+            background: linear-gradient(to right, $background_color 0%, $middle_shine_color 8%, $background_color 16%)
+            background-size: 200% 100%
+            background-position: 100% 100%
+            background-clip: text
+            animation: shine_text 8s infinite forwards linear
+        
+        div
+            @include set_size($width: $min_w_margin)
+            @include postioning($left: 100%)
+            background-color: $main_color
+            border-top-right-radius: $default_border_radius
+            border-bottom-right-radius: $default_border_radius
+            @include flex_container($justify: center, $align: center)
+        
+        svg
+            @include set_size($text_content_font + 1rem, $text_content_font + 1rem)
+            fill: $background_color
+            stroke: none
+            filter: opacity(0%)
+
+    #main_page_arrow_down
+        height: 2dvh
+        position: absolute
+        bottom: $min_v_margin
+        left: 50%
+        transform: translateX(-25%)
+        animation: main_page_moving_arrow 2s infinite
+
+
+#video_background
+    @include set_size()
+    
+    /* из-за того что видео в 16:9, нужно чтобы видео растянулось соблюдая пропорции, потому что иначе никак. 16 / 9 * 100 == 177.78, 9 / 16 * 100 = 56.25 */
+    @include set_min_size(177.78dvh, $min_height: 56.25dvw)
+    
+    /*  это своего рода object-position: center */
+    @include postioning($top: 50%, $left: 50%)
+    transform: translate(-50%, -50%)
+    
+    z-index: -3
+
+    *
+        @include set_size()
+        @include postioning()
+
+#frame_video_bg
+    z-index: -4 !important

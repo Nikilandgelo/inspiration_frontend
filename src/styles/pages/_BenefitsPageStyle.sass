@@ -1,0 +1,14 @@
+@import '../basic/_mixins'
+
+    
+#benefits_container
+    @include set_size()
+    @include grid_container($grid_columns: 1fr 1fr, $grid_rows: 1fr 1fr)
+    font-size: $text_content_font
+    column-gap: $min_w_margin
+    row-gap: $min_v_margin
+    
+    
+    div
+        @include flex_container(column, $align: center)
+        gap: $extra_min_v_margin
