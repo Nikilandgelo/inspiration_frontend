@@ -26,11 +26,11 @@ export default function RoadMapPage({ page_id, page_title, last_page = false})
             roadmap_lines = Array.from(document.querySelectorAll(".roadmap_lines"))
         }
         
-        const observer = new IntersectionObserver(function(entries, observer)
+        const observer = new IntersectionObserver(function(entries)
         {
             if (entries[0].isIntersecting) {
                 bulb_state_changer(true)
-                setting_lines(Number(entries[0].target.getAttribute("index")))
+                setting_lines(Number(entries[0].target.getAttribute("data-index")))
             }
             else {
                 bulb_state_changer(false)

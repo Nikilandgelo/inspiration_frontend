@@ -1,0 +1,72 @@
+/* основа из которой все происходит в зависимости от вида деятельности
+hex - #f7b01a */
+$p3_contrast: display-p3 0.968627 0.690196 0.101961;
+$contrast_color: color($p3_contrast / 100%);
+$contrast_color_opacity: color($p3_contrast / 40%);
+$contrast_color_inactive: color($p3_contrast / 10%);
+
+/* оттенок более светлый constrast color
+hex - #fad178 */
+$middle_shine_color: color(display-p3 0.980392 0.819608 0.470588);
+
+/* цвет гармонирующий с контрастным, который зачастую будет фоном + иногда текстом на фоне конраста
+hex - #3b2d41 */
+$p3_background: display-p3 0.231373 0.176471 0.254902;
+$background_color: color($p3_background / 100%);
+
+/* более темный оттенок background color
+hex - #1c151f */
+$p3_shadow: display-p3 0.109804 0.082353 0.121569;
+$full_shadow_color: color($p3_shadow / 100%);
+$shadow_color: color($p3_shadow / 25%);
+
+/* оттенок бэкграунд цвета ближе к белому для текста
+hex - #dcdadd */
+$p3_main: display-p3 0.862745 0.854902 0.866667;
+$main_color: color($p3_main / 100%);
+$main_color_inactive: color($p3_main / 15%);
+
+/* цвета для ошибки и в лого глобуса (ориг цвет лого)
+hex - #9d173f, #008BD0 */
+$error_color: color(display-p3 0.615686 0.090196 0.247059);
+$globus_color: color(display-p3 0.000000 0.545098 0.815686);
+
+/* фиксированные значения */
+$border-size: 3px;
+$default_border_radius: 15px;
+$extended_border_radius: 30px;
+$blur_size: 50px;
+$large_breakpoint: 1440px;
+
+/* значения для padding/margin/gap */
+$super_min_v_margin: 0.75dvh;
+$super_min_w_margin: 0.75dvw;
+$extra_min_v_margin: $super_min_v_margin * 2;
+$extra_min_w_margin: $super_min_w_margin * 2;
+$min_v_margin: $extra_min_v_margin * 2;
+$min_w_margin: $extra_min_w_margin * 2;
+$mid_v_margin: $min_v_margin * 2;
+$mid_w_margin: $min_w_margin * 2;
+$max_v_margin: $mid_v_margin * 2;
+$max_w_margin: $mid_w_margin * 2;
+
+/* значения для текста в зависимости от html font-size */
+$smaller_font: 1.45rem;
+$bigger_font: 2rem;
+$text_content_font: 3rem;
+
+/* header использует в качестве значение высоты это, нужно так потому что это используется в расчетах педдинга сверху и роадмапа и pages_content  */
+$height_header: 10dvh;
+
+/* значения времени фиксированные */
+$fixed_transition_time: 0.5s;
+$reveal_transition_time: 1s;
+
+:root {
+    --main_page_fadeout_alpha: 0;
+    --transition_time: 0.1s;
+}
+
+@media (hover: hover) {
+    :root { --transition_time: 0.5s; }
+}

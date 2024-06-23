@@ -1,6 +1,6 @@
 import HeaderLink from './LinkComponent.js'
 import scrollToAnchor from 'src/components/Section/ScrollToAnchor.js'
-import menu_hamburger from 'src/assets/svg_images/menu_hamburger.svg'
+// import menu_hamburger from 'src/assets/svg_images/menu_hamburger.svg'
 
 export default function Header()
 {

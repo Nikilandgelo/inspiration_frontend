@@ -1,0 +1,58 @@
+@import '../basic/mixins';
+@import '../basic/variables';
+
+
+#employees_page_container
+{
+    @include set_size;
+    @include grid_container($grid_rows: 1fr max-content);
+
+    gap: $min_v_margin;
+    overflow: hidden;
+
+    .carousel {
+        @include flex_container($justify: center, $wrap: nowrap);
+
+        gap: $mid_w_margin;
+        overflow: scroll hidden;
+        cursor: grab;
+        user-select: none;
+
+        &:active { cursor: grabbing }
+        
+        &::-webkit-scrollbar { display: none }
+        
+        figure {
+            @include set_size(max-content, 100%);
+
+            position: relative;
+
+            &::before {
+                @include postioning;
+
+                content: '';
+                background: linear-gradient(180deg, transparent 0%, $full_shadow_color 60%);
+                border-radius: $default_border_radius;
+            }
+            
+            .employer_photo {
+                @include set_size(24dvw);
+
+                object-fit: cover;
+                object-position: top;
+                border-radius: $default_border_radius;
+            }
+            
+            figcaption {
+                @include postioning($top: null);
+
+                padding: $extra_min_v_margin $extra_min_w_margin $extra_min_v_margin $extra_min_w_margin;                
+                font-size: $smaller_font;
+
+                .employer_name { font-size: $text_content_font }
+
+                .employer_position {font-size: $bigger_font }
+            }
+        }
+    }
+}

@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import 'src/styles/index.sass'
+import 'src/styles/index.scss'
 
 import MainPage from './pages/MainPage.js'
 import AboutPage from './pages/AboutPage/AboutPage.js'
@@ -13,7 +13,6 @@ import RoadMap from './components/RoadMap/RoadMap.js'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <>
-  {/* <React.StrictMode> */}
     <Header />
     <RoadMap />
     
@@ -22,6 +21,5 @@ root.render(
     <BenefitsPage />
     <EmployeesPage />
     <CoursesPage />
-  {/* </React.StrictMode> */}
   </>
 )

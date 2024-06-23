@@ -1,22 +1,23 @@
-@import 'basic/_variables'
-@import 'basic/_reset'
-@import 'components/_section'
-@import 'pages/_MainPageStyle'
-@import 'animations/_main_page_anim'
-@import 'components/_header'
-@import 'components/_roadmap'
-@import 'pages/_AboutPageStyle'
-@import 'components/_reveal'
-@import 'pages/_BenefitsPageStyle'
-@import 'pages/_EmployeesPageStyle'
+@import 'basic/variables';
+@import 'basic/reset';
+@import 'components/section';
+@import 'pages/MainPageStyle';
+@import 'animations/main_page_anim';
+@import 'components/header';
+@import 'components/roadmap';
+@import 'pages/AboutPageStyle';
+@import 'components/reveal';
+@import 'pages/BenefitsPageStyle';
+@import 'pages/EmployeesPageStyle';
 
 
-[data-fixed_section = 'true']
+[data-fixed_section = 'true'] {
     height: 100dvh
+}
 
 
-// /*                              ALL MEDIAS                    */
-// /* по ширине */
+//                              ALL MEDIAS                    
+// по ширине
 // @media (max-width: 1580px)
 // {
 //   header { width: 40vw !important; }
@@ -106,7 +107,7 @@
 
 
 
-// /* по высоте */
+// по высоте
 // @media (max-height: 850px) and (orientation: landscape)
 // { :root { --height_header: 12vh !important; } }
 
@@ -155,7 +156,8 @@
 // {
 //   :root { --height_header: 8.5vh !important; }
   
-//   /* так как проверка на orientation: portrait я гарантированно знаю, что ширина меньше 844px, а значит они есть */
+//  так как проверка на orientation: portrait я гарантированно
+//  знаю, что ширина меньше 844px, а значит они есть
 //   #header_hamburger { height: 3.5vh !important; }
 //   #logo_wrapper { height: 7.5vh !important; }
 // }

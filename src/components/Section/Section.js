@@ -8,12 +8,6 @@ export const main_page_dict = {
 }
 let sections = null
 
-/* достаем переменную :root, которую использует overlap ::after main пейджа и делим по запятой, достаем последний альфа канал, остальное собираем обратно */
-const fadeout_colors = getComputedStyle(document.documentElement).getPropertyValue('--main_page_fadeout').split(',')
-let alpha_channel = fadeout_colors.pop()
-fadeout_colors.join(',')
-
-
 function make_changes_in_frame(scroll_value) {
     window.requestAnimationFrame( () =>
     {
@@ -26,9 +20,8 @@ function scaling_down_main_page(Yscroll) {
     let scale_down = 1.0 - Yscroll
     main_page_dict['main_page_el'].style.setProperty('transform', `scale(${scale_down})`)
 
-    /* умножаем на 3.4, потому что при Yscroll 0.3 максимуме, нужно чтобы было альфа канал был >= 1.0, а этого можно достичь умножая 0.3 на ~3.4 */
-    alpha_channel = `, ${Yscroll * 3.4})`
-    document.documentElement.style.setProperty('--main_page_fadeout', fadeout_colors + alpha_channel)
+    /* умножаем на 334, потому что при Yscroll 0.3 максимуме, нужно чтобы он был >= 100, а этого можно достичь умножая 0.3 на 334 */
+    document.documentElement.style.setProperty('--main_page_fadeout_alpha', Yscroll * 334)
     
     /* for example 1017px * 0.9 === 915.3, etc. */
     return main_page_dict['main_page_height'] * scale_down
@@ -73,7 +66,7 @@ export default function Section({ id, content, index, fixed_height = false, back
 
     if (is_start_page) {
         return (
-            <section id={id} index={index}
+            <section id={id} data-index={index}
             className={bordered_section ? 'bordered_section' : ''}>
                 <div className = 'sections_content' data-fixed_section='true'>
                     {content}
@@ -84,7 +77,7 @@ export default function Section({ id, content, index, fixed_height = false, back
     }
     else {
         return (
-            <section id={id} index={index}>
+            <section id={id} data-index={index}>
                 <div className = 'sections_content' data-fixed_section ={fixed_height ? 'true' : 'false'}>
                     <h2>{section_title}</h2>
                     {content}

@@ -1,0 +1,49 @@
+@import '../basic/variables';
+    
+
+@keyframes typing_text {
+    0%, 17.5%, 35%, 100% { content: '' }
+    1.25%, 16.25% { content: 'I' }
+    2.5%, 15% { content: 'In' }
+    3.75%, 13.75% { content: 'Inc' }
+    5%, 12.5% { content: 'Incp' }
+    6.25%, 11.25% { content: 'Incpi' }
+    7.5%, 10% { content: 'Incpir' }
+    8.75% { content: 'Incpira' }
+
+    18.75%, 33.75% { content: 'I' }
+    20%, 32.5% { content: 'In' }
+    21.25%, 31.25% { content: 'Ins' }
+    22.5%, 30% { content: 'Insp' }
+    23.75%, 28.75% { content: 'Inspe' }
+    25%, 27.5% { content: 'Insper' }
+    26.25% { content: 'Inspera' }
+
+    36.25%, 98.75%  { content: 'I' }
+    37.5%, 97.5%  { content: 'In' }
+    38.75%, 96.25%  { content: 'Ins' }
+    40%, 95% { content: 'Insp' }
+    41.25%, 93.75% { content: 'Inspi' }
+    42.5%, 92.5%  { content: 'Inspir' }
+    43.75%, 91.25%  { content: 'Inspira' }
+    45%, 90%  { content: 'Inspirat' }
+    46.25%, 88.75% { content: 'Inspirati' }
+    47.5%, 87.5% { content: 'Inspiratio' }
+    48.75%, 86.25% { content: 'Inspiration' }
+}
+
+@keyframes blink_cursor {
+    0%, 100% { opacity: 0 }
+    50% { opacity: 1 }
+}
+
+@keyframes shine_text {
+    /* 232% старт потому что градиент от 0 до 16% и если 216% видно как прям впритык начинается, а 50% потому что чтоб delay был небольшой, а не прям сразу повторение */
+    0% { background-position: 232% 100% }
+    50% { background-position: 100% 100% }
+}
+
+@keyframes main_page_moving_arrow {
+    0%, 100% { transform: translateY(0%) scale(0.85) }
+    50% { transform: translateY(25%) scale(1) }
+}

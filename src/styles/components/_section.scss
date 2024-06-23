@@ -1,41 +1,42 @@
-@import '../basic/_mixins'
-@import '../basic/_variables'
+@import '../basic/mixins';
+@import '../basic/variables';
 
 
-section
+section {
     // исключая скроллбар
-    width: 100%
-    min-height: 100dvh
+    width: 100%;
+    min-height: 100dvh;
 
     // из-за бэкграунд контента
-    position: relative
+    position: relative;
     
     // из-за бэкграунд видео, так оно в высоту лезло куда не надо
-    overflow: hidden
+    overflow: hidden;
 
     /* на scale main_page и translate других секций */
-    transition: transform $fixed_transition_time
+    transition: transform $fixed_transition_time;
 
     /* чтобы не приходилось при расчетах translate других секций делить на 2 и при навигации на главную оно было в фулл вью */
-    transform-origin: top
+    transform-origin: top;
 
     /* были артифакты при скейле (линии и прочие) */
-    will-change: transform
+    will-change: transform;
 
-    .sections_content
+    .sections_content {
         /* 10% слева + 10% roadmap, по высоте 100% не мог */
-        width: 80%
-        min-height: 100dvh
+        width: 80%;
+        min-height: 100dvh;
         
-        @include postioning(relative, $left: 10%)
-        @include flex_container(column, $justify: center, $align: center, $wrap: nowrap)
+        @include postioning(relative, $left: 10%);
+        @include flex_container(column, $justify: center, $align: center, $wrap: nowrap);
 
         /* часовая стрелка top, right, bottom, left */
-        padding: calc($height_header + $mid_v_margin) $mid_w_margin $mid_v_margin $mid_w_margin
+        padding: calc($height_header + $mid_v_margin) $mid_w_margin $mid_v_margin;
+        row-gap: $min_v_margin;
+    }
+}
 
-        row-gap: $min_v_margin
-
-
-.bordered_section
-    border-radius: $extended_border_radius
+.bordered_section {
+    border-radius: $extended_border_radius;
     outline: 3px solid $background_color
+}

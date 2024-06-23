@@ -26,7 +26,7 @@ export default function AboutPage()
             content={
             <div className="about_section left_text_about">
                 <div id="about_languages">
-                    <p>Центр иностранных языков "Inspiration" был основан в 2012 году и занимается обучением студентов любого возраста таким языкам как:</p>
+                    <p>Центр иностранных языков &quot;Inspiration&quot; был основан в 2012 году и занимается обучением студентов любого возраста таким языкам как:</p>
                     <div>
                         <LanguageComponent flag={english_flag}
                         text={'Английский'}/>

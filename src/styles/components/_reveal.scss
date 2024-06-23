@@ -1,0 +1,42 @@
+@import '../basic/mixins';
+@import '../basic/variables';
+
+    
+.reveal_wrapper {
+    @include set_size(100%, max-content);
+    @include flex_container($justify: center);
+
+    /* 30dvh потому что reveal происходит, когда видно 0.3 части элемента */
+    transform: translateY(30dvh);
+    will-change: opacity, transform;
+    opacity: 0;
+}
+
+.reveal_filled_wrapper {
+    @include set_size(100%, 100%);
+
+    padding-top: $min_v_margin;
+    position: relative;
+    overflow: hidden;
+    
+    --translate_position: translateX(0%);
+    --backdrop_size: blur(#{$blur_size});
+
+    &::after {
+        @include set_size;
+        @include postioning;
+
+        content: '';
+        border-radius: $default_border_radius;
+        backdrop-filter: var(--backdrop_size);
+        transform: var(--translate_position);
+    }
+}   
+
+.contrast_color {
+    &::after { background-color: $contrast_color_inactive }
+}
+
+.main_color {
+    &::after { background-color: $main_color_inactive }
+}
