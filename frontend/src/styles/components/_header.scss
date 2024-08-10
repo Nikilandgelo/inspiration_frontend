@@ -1,0 +1,119 @@
+.last_header {
+    border: $border-size solid $background_color;
+    color: $background_color;
+    
+    --header_link_line_color: #{$background_color} !important;
+}
+
+header {
+    @include set_size($width: 38vw, $height: var(--height_header));
+    @include postioning(fixed, $min_v_margin, $left: 50%);
+    @include grid_container(1fr max-content 1fr, 100%);
+
+    @media screen and (max-width: 1700px) {
+        @include set_size($width: 43vw, $height: var(--height_header));
+    }
+    
+    @media screen and (max-width: $large_breakpoint) {
+        @include grid_container(1fr 1fr, 100%);
+        @include set_size(
+            calc(100% - (max($min_w_margin, 16px) * 2) ),
+            var(--height_header));
+    }
+
+    padding: $extra_min_v_margin $extra_min_w_margin $extra_min_v_margin $extra_min_w_margin;
+    align-items: center;
+    gap: $min_w_margin;
+    transform: translateX(-50%);
+    border: $border-size solid $main_color;
+    border-radius: 0 var(--extended_border_radius);
+    background-color: $main_color_inactive;
+    backdrop-filter: blur($blur_size);
+    
+    --header_link_line_color: #{$main_color};
+    
+    // из за карусели с сотрудниками где z-index: 1 swiper
+    z-index: 99;
+
+    .header_link {
+        @include flex_container($justify: center, $align: center);
+
+        @media screen and (max-width: $large_breakpoint) 
+        { display: none; }
+
+        .header_text {
+            position: relative;
+            font-size: var(--bigger_font);
+            cursor: pointer;
+            
+            --pseudo_value_transform: null;
+        }
+        
+        .header_text::after {
+            @include set_size(100%, $border-size);
+            @include postioning($top: calc(100% + $border-size), $left: 0);
+
+            content: '';
+            background-color: var(--header_link_line_color);
+            border-radius: var(--default_border_radius);
+            transform: var(--pseudo_value_transform)
+        }
+    }
+    
+    .header_wrapper {
+        @include set_size(100%, 70%);
+        @include flex_container;
+
+        padding: 0 $extra_min_w_margin;
+
+        @media screen and (max-width: $tablets_breakpoint) 
+        { padding: 0 $min_w_margin; }
+
+        @media screen and (max-width: $phones_breakpoint) 
+        { padding: 0 $mid_w_margin; }
+    }
+
+    .content_header_wrapper {
+        @include set_size(4.5vw, 100%);
+
+        @media screen and (max-width: $mini_large_breakpoint) 
+        { @include set_size(5.5vw, 100%); }
+
+        @media screen and (max-width: $tablets_breakpoint) 
+        { @include set_size(6.25vw, 100%); }
+
+        @media screen and (max-width: $landscape_phones_breakpoint) 
+        { @include set_size(7.5vw, 100%); }
+
+        @media screen and (max-width: $phones_breakpoint) 
+        { @include set_size(9.5vw, 100%); }
+
+        @media screen and (max-width: 460px)
+        { @include set_size(11vw, 100%); }
+
+        @media screen and (max-width: 380px)
+        { @include set_size(13vw, 100%); }
+
+        cursor: pointer;
+    }
+
+    figure {
+        position: relative;
+
+        #logo { @include set_size; }
+        
+        figcaption {
+            @include set_size(100%, max-content);
+            @include postioning($top: 100%);
+
+            pointer-events: none;
+        }
+    }
+
+    .hamburger_wrapper {
+        display: none;
+
+        @media screen and (max-width: $large_breakpoint) 
+        { @include flex_container($justify: flex-end); }
+    }
+}

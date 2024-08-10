@@ -1,0 +1,29 @@
+.reveal_wrapper {
+    @include set_size(100%, max-content);
+    @include flex_container($justify: center);
+}
+
+.reveal_filled_wrapper {
+    position: relative;
+    overflow: hidden;
+
+    --translate_position: null;
+
+    &::after {
+        @include set_size;
+        @include postioning;
+
+        content: '';
+        border-radius: var(--default_border_radius);
+        backdrop-filter: blur(#{$blur_size});
+        transform: var(--translate_position);
+    }
+}   
+
+.contrast_color {
+    &::after { background-color: $contrast_color_inactive }
+}
+
+.main_color {
+    &::after { background-color: $main_color_inactive }
+}

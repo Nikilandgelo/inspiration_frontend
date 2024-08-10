@@ -1,0 +1,40 @@
+name: CI/CD pipeline
+on:
+    push
+jobs:
+    CI_Frontend:
+        name: Frontend Continious Integration
+        runs-on: ubuntu-22.04
+        steps:
+        -   name: Установка репозитория
+            uses: actions/checkout@v4
+            with:
+                repository: Nikilandgelo/inspiration_frontend
+        -   name: Установка NodeJS
+            uses: actions/setup-node@v4
+            with:
+                node-version: 22.3.0
+        -   name: Установка зависимостей
+            run: |
+                cd frontend
+                npm install
+        -   name: Проверка JS кода с помощью ESLint
+            run: npx eslint "**/*.js"
+        -   name: Проверка стилей с помощью StyleLint
+            run: npx stylelint "**/*.scss"
+    CI_Backend:
+        name: Backend Continious Integration
+        runs-on: ubuntu-22.04
+        steps:
+        -   name: Установка репозитория
+            uses: actions/checkout@v4
+            with:
+                repository: Nikilandgelo/inspiration_frontend
+        -   name: Установка Python
+            uses: actions/setup-python@v5.1.1
+        -   name: Установка зависимостей
+            run: |
+                cd mini_backend
+                pip install -r requirements.txt
+        -   name: Проверка кода на синтаксические ошибки линтером flake8
+            run: flake8 . --exclude=venv/

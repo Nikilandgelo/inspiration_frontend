@@ -1,0 +1,96 @@
+#courses_section {
+    background-color: $contrast_color;
+    color: $background_color;
+
+    h3 { 
+        width: 65%;
+
+        @media screen and (max-width: $landscape_phones_breakpoint) 
+        { width: 85%; }
+
+        @media screen and (max-width: $phones_breakpoint) 
+        { width: 100%; }
+    }
+
+
+}
+
+#courses_page_form {
+    @include flex_container(column, center, center);
+
+    row-gap: $min_v_margin;
+    font-size: var(--text_content_font);
+
+    label {
+        @include flex_container($justify: center, $align: center);
+
+        width: 30vw;
+
+        @media screen and (max-width: $large_breakpoint) 
+        { width: 45vw; }
+
+        @media screen and (max-width: $tablets_breakpoint) 
+        { width: 52.5vw; }
+
+        @media screen and (max-width: $landscape_phones_breakpoint) 
+        { width: 55vw; }
+
+        @media screen and (max-width: $phones_breakpoint) 
+        { width: 65vw; }
+
+        @media screen and (max-width: 420px) 
+        { width: 75vw; }
+        
+        row-gap: $super_min_v_margin;
+        position: relative;
+        
+        --pseudo_transform_value: 0%;
+        --pseudo_opacity_value: 0;
+
+        &::after {
+            @include part_positioning(bottom);
+
+            content: 'Неккоректный ввод';
+            transform: translateY(var(--pseudo_transform_value));
+            opacity: var(--pseudo_opacity_value);
+            font-size: var(--smaller_font);
+            color: $error_color;
+        }
+    }
+    
+    input {
+        width: 100%;
+        background-color: transparent;
+        border: $border-size solid $background_color;
+    }
+
+    .invalid_input {
+        border: $border-size solid $error_color;
+        background-color: $error_color_input;
+    }
+
+    button { 
+        background-color: $background_color;
+        color: $main_color;
+        position: relative;
+        top: $mid_v_margin;
+        min-width: 25%;
+
+        @media screen and (max-width: $tablets_breakpoint) 
+        { min-width: 30%; }
+
+        @media screen and (max-width: $landscape_phones_breakpoint) 
+        { min-width: 35%; }
+
+        @media screen and (max-width: $phones_breakpoint) 
+        { min-width: 42%; }
+
+        @media screen and (max-width: 420px) 
+        { min-width: 52%; }
+    }
+
+    input, button {
+        padding: $extra_min_v_margin $extra_min_w_margin;
+        border-radius: var(--default_border_radius);
+    }
+}

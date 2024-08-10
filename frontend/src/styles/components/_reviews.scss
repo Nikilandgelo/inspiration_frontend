@@ -1,0 +1,90 @@
+.reviews_container {
+    user-select: none;
+
+    @media screen and (max-width: $large_breakpoint) 
+    { @include set_size(65%) }
+
+    @media screen and (max-width: $mini_large_breakpoint) 
+    { @include set_size(70%) }
+
+    @media screen and (max-width: $tablets_breakpoint) 
+    { @include set_size(75%) }
+
+    @media screen and (max-width: $landscape_phones_breakpoint) 
+    { @include set_size(90%) }
+
+    @media screen and (max-width: $phones_breakpoint) 
+    { @include set_size(100%) }
+    
+    .swiper { @include set_size; }
+
+    .swiper-wrapper { align-items: center; }
+
+    .swiper-slide { 
+        @include set_size(max-content, max-content);
+        @include grid_container(100%, max-content 1fr);
+        
+        row-gap: $min_v_margin;
+        padding: $super_min_v_margin $super_min_w_margin;
+    }
+
+    .review {
+        @include set_size;
+        @include flex_container($align: center, $wrap: nowrap);
+
+        column-gap: $extra_min_w_margin;
+
+        @media screen and (max-width: $large_breakpoint) 
+        { column-gap: $min_w_margin; }
+       
+        .nav_arrows { 
+            width: 3vw;
+
+            @media screen and (max-width: $large_breakpoint) 
+            { width: 4vw; }
+
+            @media screen and (max-width: $mini_large_breakpoint) 
+            { width: 4.5vw; }
+
+            @media screen and (max-width: $tablets_breakpoint) 
+            { width: 5vw; }
+
+            @media screen and (max-width: $landscape_phones_breakpoint) 
+            { width: 6vw; }
+
+            @media screen and (max-width: $phones_breakpoint) 
+            { width: 7vw; }
+
+            @media screen and (max-width: 450px) 
+            { width: 8vw; }
+
+            cursor: pointer; 
+        }
+
+        .review_content {
+            @include flex_container(column, center, center, nowrap);
+
+            background-color: $background_color;
+            color: $main_color;
+            border-radius: var(--extended_border_radius);
+            padding: $min_v_margin $min_w_margin;
+            row-gap: $min_v_margin;
+
+            p { white-space: pre-wrap; }
+        }
+
+        .stars { 
+            @include flex_container;
+
+            column-gap: $extra_min_w_margin;
+
+            img {
+                @media screen and (max-width: $tablets_breakpoint) 
+                { width: 3.5vw; }
+
+                @media screen and (max-width: $phones_breakpoint) 
+                { width: 4vw; }
+            }
+        }
+    }
+}

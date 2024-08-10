@@ -1,0 +1,147 @@
+#start_page_content
+{
+    @include set_size(100%, max-content);
+    @include flex_container(column, center);
+
+    text-align: left;
+    gap: $min_v_margin;
+
+    @media screen and (max-width: $large_breakpoint) {
+        @include flex_container(column, center, center);
+    }
+
+    span {
+        * { display: inline; }
+    }
+    
+    .inspiration_title::before { 
+        content: ''; 
+        color: $contrast_color; 
+    }
+
+    .title_ready::before {
+        animation: typing_text 9s ease-in-out infinite;
+    }
+
+    @keyframes typing_text {
+        0%, 17.5%, 35%, 100% { content: '' }
+        1.25%, 16.25% { content: 'I' }
+        2.5%, 15% { content: 'In' }
+        3.75%, 13.75% { content: 'Inc' }
+        5%, 12.5% { content: 'Incp' }
+        6.25%, 11.25% { content: 'Incpi' }
+        7.5%, 10% { content: 'Incpir' }
+        8.75% { content: 'Incpira' }
+
+        18.75%, 33.75% { content: 'I' }
+        20%, 32.5% { content: 'In' }
+        21.25%, 31.25% { content: 'Ins' }
+        22.5%, 30% { content: 'Insp' }
+        23.75%, 28.75% { content: 'Inspe' }
+        25%, 27.5% { content: 'Insper' }
+        26.25% { content: 'Inspera' }
+
+        36.25%, 98.75%  { content: 'I' }
+        37.5%, 97.5%  { content: 'In' }
+        38.75%, 96.25%  { content: 'Ins' }
+        40%, 95% { content: 'Insp' }
+        41.25%, 93.75% { content: 'Inspi' }
+        42.5%, 92.5%  { content: 'Inspir' }
+        43.75%, 91.25%  { content: 'Inspira' }
+        45%, 90%  { content: 'Inspirat' }
+        46.25%, 88.75% { content: 'Inspirati' }
+        47.5%, 87.5% { content: 'Inspiratio' }
+        48.75%, 86.25% { content: 'Inspiration' }
+    }
+    
+    .inspiration_title::after {
+        content: '';
+        border-left: $border-size solid $contrast_color;
+    }
+
+    .title_ready::after {
+        animation: blink_cursor 1s ease-in-out infinite;
+    }
+    
+    @keyframes blink_cursor {
+        0%, 100% { opacity: 0 }
+        50% { opacity: 1 }
+    }
+
+    .quote_icon { width: var(--icon_size_width) }
+
+    #main_page_quote {
+        font-size: var(--text_content_font);
+        text-align: center;
+        
+        /* чтобы поближе к иконке */
+        @include postioning(relative, $top: - $extra_min_v_margin);
+    }
+    
+    #main_page_action
+    {
+        @include set_size(max-content, max-content);
+        @include flex_container;
+
+        background-color: $contrast_color;
+        padding: $extra_min_v_margin $extra_min_w_margin $extra_min_v_margin $extra_min_w_margin;
+        border-radius: var(--default_border_radius);
+        
+        // для div svg
+        position: relative;
+
+        strong {
+            font-size: var(--text_content_font);
+            color: transparent;
+            background: linear-gradient(to right, $background_color 0%, $middle_shine_color 7.5%, $background_color 15%);
+            background-clip: text;
+            background-size: 200% 100%;
+            background-position: 100% 100%;
+        }
+        
+        div {
+            @include set_size(max-content, 100%);
+            @include postioning($left: 100%);
+            @include flex_container($justify: center, $align: center);
+
+            padding: $super_min_v_margin $super_min_w_margin $super_min_v_margin $super_min_w_margin;
+            background-color: $main_color;
+            border-top-right-radius: var(--default_border_radius);
+            border-bottom-right-radius: var(--default_border_radius);
+            z-index: -1;
+
+            svg {
+                @include set_size(var(--icon_size_width));
+
+                fill: $background_color;
+                stroke: none;
+            }
+        }
+    }
+    
+    #main_page_arrow_down {
+        width: var(--icon_size_width);
+        position: absolute;
+        bottom: $min_v_margin;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.main_bg {
+    @include set_size(100vw, 100vh);
+    
+    /* из-за того что видео в 16:9, нужно чтобы видео растянулось соблюдая пропорции, потому что иначе никак. 16 / 9 * 100 == 177.78, 9 / 16 * 100 = 56.25 */
+    @include set_min_size(177.78vh, $min_height: 56.25vw);
+    
+    /*  это своего рода object-position: center */
+    @include postioning($top: 50%, $left: 50%);
+
+    transform: translate(-50%, -50%);
+    border-radius: var(--extended_border_radius);
+    outline: 2px solid $background_color;
+}
+
+.video_background { z-index: -2; }
+
+.frame_video_bg { z-index: -3 !important; }

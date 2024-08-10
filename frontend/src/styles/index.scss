@@ -1,0 +1,21 @@
+@import 'basic/variables';
+@import 'basic/mixins';
+@import 'basic/reset';
+@import 'components/section';
+@import 'pages/MainPageStyle';
+@import 'components/header';
+@import 'components/roadmap';
+@import 'pages/AboutPageStyle';
+@import 'components/reveal';
+@import 'pages/BenefitsPageStyle';
+@import 'pages/EmployeesPageStyle';
+@import 'pages/CoursesPageStyle';
+@import 'components/popup';
+@import 'components/footer';
+@import 'components/reviews';
+@import 'components/faqs';
+
+
+[data-fixed_section = 'true'] { height: 100vh }
+
+.popup_icon_courses_page { width: 30% }

@@ -1,0 +1,24 @@
+networks:
+  inspiration_network:
+
+services:
+  
+  nginx_frontend:
+    build: ./frontend
+    container_name: nginx_frontend_container
+    networks:
+      - inspiration_network
+    ports:
+      - 80:80
+
+  backend:
+    build: ./mini_backend
+    container_name: backend_container
+    env_file:
+      - ./.env
+    networks:
+      - inspiration_network
+    depends_on:
+      - nginx_frontend
+    
+# restart: unless-stopped

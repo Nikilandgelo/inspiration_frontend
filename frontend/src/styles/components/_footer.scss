@@ -1,0 +1,90 @@
+footer {
+    @include set_size(100%, max-content);
+    @include flex_container(column, center, center);
+    
+    background-color: $background_color;
+    z-index: 2;
+    position: absolute;
+    row-gap: $extra_min_v_margin;
+    padding: $mid_v_margin $mid_w_margin $min_v_margin;
+
+    #footer_content {
+        @include set_size;
+        @include grid_container(1fr 1fr, 1fr max-content);
+
+        @media screen and (max-width: $tablets_breakpoint) 
+        { @include grid_container(100%, repeat(3, max-content)); }
+
+        gap: $mid_v_margin $min_w_margin;
+
+        .footer_block {
+            @include grid_container(max-content 1fr, 100%);
+
+            @media screen and (max-width: $tablets_breakpoint) 
+            { @include grid_container(100% !important, max-content 1fr !important); }
+
+            gap: $extra_min_v_margin $extra_min_w_margin;
+
+            img { 
+                width: var(--icon_size_width);
+
+                @media screen and (max-width: $tablets_breakpoint) 
+                { order: -1; }
+            }
+            
+            .footer_info {
+                @include flex_container(column);
+
+                row-gap: $extra_min_v_margin;
+    
+                strong { font-size: var(--text_content_font); }
+
+                address {
+                    @include flex_container(column);
+
+                    row-gap: $extra_min_v_margin;
+
+                    a { font-size: var(--bigger_font); }
+
+                    #vk_icon { 
+                        width: var(--icon_size_width);
+
+                        img { @include set_size; }
+                    }
+                }
+            }
+        }
+
+        .reverse_footer_block {
+            @include grid_container(1fr max-content, 100%);
+
+            .reverse_footer_info {
+                @include flex_container(column, $align: flex-end, $wrap: nowrap);
+
+                @media screen and (max-width: $tablets_breakpoint) 
+                { @include flex_container(column, $wrap: nowrap); }
+
+                iframe {
+                    @include set_size;
+
+                    border-radius: var(--default_border_radius);
+                    aspect-ratio: 1.6 / 1;
+                }
+            }
+        }
+        
+        #author { 
+            @include set_size(200%);
+
+            @media screen and (max-width: $tablets_breakpoint) 
+            { @include set_size; }
+
+            font-size: var(--smaller_font);
+        }
+
+        .underlink { 
+            text-decoration: underline solid $main_color;
+            text-underline-position: under
+        }
+    }
+}

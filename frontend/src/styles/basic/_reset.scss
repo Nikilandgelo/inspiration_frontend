@@ -1,0 +1,68 @@
+* {
+    margin: 0; padding: 0; border: 0;
+    box-sizing: border-box;    // чтобы везде пэддинги были внутрь
+}
+
+html {
+    /* стандартный размер шрифта браузера = 16px. 16px = 100%, 10px = 62.5%. */
+    font: 62.5% / 1.5 Montserrat, sans-serif;
+    text-align: center;
+    color: $main_color;
+    overflow-x: hidden;
+    background-color: $background_color;
+    scroll-behavior: smooth;
+}
+html:has(dialog[open]) { overflow-y: hidden !important; }
+
+body {
+    @include set_size(100%, 100%);
+    
+    /* smooth text */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* это и в html и здесь, чтобы на мобильных точно не было, при таком раскладе это точно работает */
+    overflow-x: hidden;
+    scrollbar-width: none;
+}
+
+// for safari only
+body::-webkit-scrollbar { @include set_size(0, 0); }
+
+img { user-select: none }
+
+strong {
+    /* вместо font-weight: bold, которое по дефолту 700 */
+    font-weight: 600
+}
+
+a, button {
+    text-decoration: none;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+
+input { font: inherit; }
+
+input:focus { outline: none; }
+
+input::placeholder { color: $background_color_input; }
+
+u {
+    text-decoration: underline solid $contrast_color;
+    text-underline-position: under
+}
+
+h1 { font-size: var(--h1_font) }
+
+h2 { font-size: var(--h2_font) }
+
+h3 {font-size: var(--h3_font) }
+
+svg {
+    fill: $main_color;
+    stroke: $main_color;
+}
+
+address { font-style: normal; }

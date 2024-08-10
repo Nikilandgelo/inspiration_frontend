@@ -1,0 +1,118 @@
+/* основа из которой все происходит в зависимости от вида деятельности
+hex - #f7b01a */
+$p3_contrast: display-p3 0.968627 0.690196 0.101961;
+$contrast_color: color($p3_contrast / 100%);
+$contrast_color_opacity: color($p3_contrast / 40%);
+$contrast_color_inactive: color($p3_contrast / 10%);
+
+/* оттенок более светлый constrast color
+hex - #fad178 */
+$middle_shine_color: color(display-p3 0.980392 0.819608 0.470588);
+
+/* цвет гармонирующий с контрастным, который зачастую будет фоном + иногда текстом на фоне конраста
+hex - #3b2d41 */
+$p3_background: display-p3 0.231373 0.176471 0.254902;
+$background_color: color($p3_background / 100%);
+$background_color_input: color($p3_background / 50%);
+$background_color_inactive: color($p3_background / 15%);
+
+/* более темный оттенок background color
+hex - #1c151f */
+$p3_shadow: display-p3 0.109804 0.082353 0.121569;
+$full_shadow_color: color($p3_shadow / 100%);
+$popup_backdrop_color: color($p3_shadow / 90%);
+$shadow_color: color($p3_shadow / 25%);
+
+/* оттенок бэкграунд цвета ближе к белому для текста
+hex - #dcdadd */
+$p3_main: display-p3 0.862745 0.854902 0.866667;
+$main_color: color($p3_main / 100%);
+$main_color_popup: color($p3_main / 80%);
+$main_color_inactive: color($p3_main / 15%);
+
+/* цвета для ошибки hex - #9d173f */
+$p3_error: display-p3 0.615686 0.090196 0.247059;
+$error_color: color($p3_error / 100%);
+$error_color_input: color($p3_error / 25%);
+
+/* фиксированные значения */
+$border-size: 2.25px;
+$blur_size: 50px;
+$large_breakpoint: 1399.98px;
+$mini_large_breakpoint: 1199.98px;
+$tablets_breakpoint: 991.98px;
+$landscape_phones_breakpoint: 767.98px;
+$phones_breakpoint: 575.98px;
+
+/* значения для padding/margin/gap */
+$super_min_v_margin: 0.75vh;
+$super_min_w_margin: 0.75vw;
+$extra_min_v_margin: $super_min_v_margin * 2;
+$extra_min_w_margin: $super_min_w_margin * 2;
+$min_v_margin: $extra_min_v_margin * 2;
+$min_w_margin: $extra_min_w_margin * 2;
+$mid_v_margin: $min_v_margin * 2;
+$mid_w_margin: $min_w_margin * 2;
+$max_v_margin: $mid_v_margin * 2;
+$max_w_margin: $mid_w_margin * 2;
+
+/* значения времени фиксированные */
+$main_sections_time: 0.5s;
+$fixed_transition_time: 1s;
+
+:root {
+    /* header использует в качестве значение высоты это, нужно так потому что это используется в расчетах педдинга сверху и роадмапа и pages_content  */
+    --height_header: 10vh;
+    
+    @media screen and (max-width: $tablets_breakpoint) 
+    { --height_header: 9.5vh; }
+
+    
+    --default_border_radius: 10px;
+    --extended_border_radius: 20px;
+
+    @media screen and (min-width: $phones_breakpoint) {
+        --default_border_radius: 15px;
+        --extended_border_radius: 30px;
+    }
+
+    --icon_size_width: 2.25vw;
+    
+    @media screen and (max-width: 1700px) 
+    { --icon_size_width: 2.55vw !important; }
+
+    @media screen and (max-width: $large_breakpoint) 
+    { --icon_size_width: 3vw !important; }
+
+    @media screen and (max-width: $mini_large_breakpoint) 
+    { --icon_size_width: 3.5vw !important; }
+
+    @media screen and (max-width: $tablets_breakpoint) 
+    { --icon_size_width: 4vw !important; }
+
+    @media screen and (max-width: $landscape_phones_breakpoint) 
+    { --icon_size_width: 5vw !important; }
+
+    @media screen and (max-width: $phones_breakpoint) 
+    { --icon_size_width: 6vw !important; }
+
+    @media screen and (max-width: 420px)
+    { --icon_size_width: 7.5vw !important; }
+    
+    
+    @media screen and (min-width: $landscape_phones_breakpoint) {
+        --smaller_font: clamp(1.2rem, 1.029rem + 0.223vw, 1.6rem);
+        --bigger_font: clamp(1.5rem, 1.2rem + 0.391vw, 2.2rem);
+        --text_content_font: clamp(2rem, 1.571rem + 0.558vw, 3rem);
+        --h3_font: clamp(3rem, 2.357rem + 0.837vw, 4.5rem);
+        --h2_font: clamp(5.05rem, 4.214rem + 1.088vw, 7rem);
+        --h1_font: clamp(6rem, 4.929rem + 1.395vw, 8.5rem);
+    }
+
+    --smaller_font: clamp(1rem, 0.857rem + 0.446vw, 1.2rem);
+    --bigger_font: clamp(1.2rem, 0.986rem + 0.67vw, 1.5rem);
+    --text_content_font: clamp(1.45rem, 1.057rem + 1.228vw, 2rem);
+    --h3_font: clamp(1.8rem, 0.943rem + 2.679vw, 3rem);
+    --h2_font: clamp(2.5rem, 0.679rem + 5.692vw, 5.05rem);
+    --h1_font: clamp(2.95rem, 0.771rem + 6.808vw, 6rem);
+}

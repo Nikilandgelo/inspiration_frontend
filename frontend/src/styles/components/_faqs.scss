@@ -1,0 +1,64 @@
+.faq_container {
+    background-color: $shadow_color;
+
+    #faq_wrapper {
+        @include set_size;
+        @include flex_container(column, $wrap: nowrap);
+
+        padding: $extra_min_v_margin $extra_min_w_margin;
+
+        @media screen and (max-width: $large_breakpoint) {
+            padding: $min_v_margin $min_w_margin;
+        }
+
+        row-gap: $min_v_margin;
+        overflow-y: scroll;
+        scrollbar-width: thin;
+        scrollbar-color: $background_color transparent;
+        
+        // for Safari
+        &::-webkit-scrollbar { width: $super_min_w_margin; }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $background_color;
+            border-radius: 2px;
+        }
+    }
+
+    .detail {
+        background-color: $background_color;
+        border-radius: var(--default_border_radius);
+        color: $main_color;
+        text-align: left;
+        transition: $main_sections_time ease-in-out;
+        
+        .summary {
+            @include grid_container($grid_columns: 1fr max-content, $grid_rows: 100%);
+
+            padding: $extra_min_v_margin $extra_min_w_margin;
+
+            @media screen and (max-width: $large_breakpoint) {
+                padding: $min_v_margin $min_w_margin;
+            }
+
+            column-gap: $min_w_margin;
+            cursor: pointer;
+            user-select: none;
+
+            svg { @include set_size(var(--icon_size_width))}
+        }
+
+        p {
+            padding: $extra_min_v_margin $extra_min_w_margin;
+
+            @media screen and (max-width: $large_breakpoint) {
+                padding: $min_v_margin $min_w_margin;
+            }
+
+            transform-origin: top;
+            overflow: hidden;
+            font-size: var(--bigger_font);
+            white-space: pre-wrap;
+        }
+    }
+}

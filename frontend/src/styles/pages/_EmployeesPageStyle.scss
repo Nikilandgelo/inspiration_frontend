@@ -1,0 +1,95 @@
+#employees_page_container {
+    @include set_size;
+    @include grid_container($grid_rows: 1fr 1.5vh);
+
+    gap: $min_v_margin;
+    overflow: hidden;
+    justify-items: center;
+
+    .swiper { 
+        @include set_size;
+        
+        .employer {
+            @include set_size;
+
+            position: relative;
+
+            &::before {
+                @include postioning;
+
+                content: '';
+                background: linear-gradient(180deg, transparent 0%, $full_shadow_color 56%);
+
+                @media screen and (max-width: $tablets_breakpoint) {
+                    background: linear-gradient(180deg, transparent 0%, $full_shadow_color 60%);
+                }
+
+                @media screen and (max-width: $landscape_phones_breakpoint) {
+                    background: linear-gradient(180deg, transparent 0%, $full_shadow_color 64%);
+                }
+
+                @media screen and (max-width: $phones_breakpoint) {
+                    background: linear-gradient(180deg, transparent 0%, $full_shadow_color 56%);
+                }
+
+                border-radius: var(--default_border_radius);
+            }
+
+            .employer_photo {
+                @include set_size;
+
+                object-fit: cover;
+                object-position: top;
+                border-radius: var(--default_border_radius);
+            }
+                
+            figcaption {
+                @include set_size(100%, max-content);
+                @include part_positioning(bottom);
+
+                padding: $extra_min_v_margin $extra_min_w_margin $extra_min_v_margin $extra_min_w_margin;
+                font-size: var(--smaller_font);
+                user-select: none;
+
+                @media screen and (max-width: $large_breakpoint) {
+                    padding: $min_v_margin $min_w_margin $min_v_margin $min_w_margin;
+                }
+
+                .employer_name {
+                    font-size: var(--text_content_font);
+                    white-space: pre-wrap;
+                }
+
+                .employer_position {
+                    font-size: var(--bigger_font);
+                    white-space: pre-wrap; }
+            }
+        }
+    }
+    
+    #scrollbar_container {
+        @include grid_container(repeat(6, 1fr));
+        @include set_size(75%, 100%);
+        
+        column-gap: $min_w_margin;
+
+        div {
+            background-color: $main_color_inactive;
+            border-radius: var(--extended_border_radius);
+            position: relative;
+            overflow: hidden;
+
+            .progress {
+                @include set_size;
+                @include postioning;
+                
+                background-color: $contrast_color;
+            }
+            .hide_progress { opacity: 0; }
+        }
+        
+        .current_progress_value {
+            background-color: $contrast_color_inactive !important;
+        }
+    }
+}

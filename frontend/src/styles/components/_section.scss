@@ -1,0 +1,51 @@
+section {
+    // исключая скроллбар
+    width: 100%;
+    min-height: 100svh;
+    
+    // из-за бэкграунд видео, так оно в высоту лезло куда не надо
+    overflow: hidden;
+
+    /* чтобы не приходилось при расчетах translate других секций делить на 2 */
+    transform-origin: top;
+    transition: $main_sections_time ease-in-out;
+
+    .sections_content {
+        /* 12% слева + 12% roadmap, по высоте 100% не мог */
+        width: 76%;
+        min-height: 100svh;
+        
+        @include postioning(relative, $left: 12%);
+        @include flex_container(column, $justify: center, $align: center, $wrap: nowrap);
+
+        /* часовая стрелка top, right, bottom, left */
+        padding: calc(var(--height_header) + $min_v_margin) max($min_w_margin, 16px) $mid_v_margin;
+        row-gap: $min_v_margin;
+
+        @media screen and (max-width: $large_breakpoint) {
+            @include postioning(relative, $left: 0%);
+           
+            width: 100%;
+        }
+    }
+    
+    #main_content {
+        justify-content: flex-end !important;
+        padding: calc(var(--height_header) + $mid_v_margin) max($min_w_margin, 16px) !important;
+        transition: $main_sections_time ease-in-out;
+        transform-origin: top;
+
+        &::before {
+            // повторение iframe видео
+            @include set_size(100vw, 100vh);
+            @include set_min_size(177.78vh, $min_height: 56.25vw);
+            @include postioning($top: 50%, $left: 50%);
+
+            content: '';
+            border-radius: var(--extended_border_radius);
+            background-color: color(display-p3 0.000000 0.000000 0.000000 / 80%);
+            z-index: -1;
+            transform: translate(-50%, -50%);
+        }
+    }
+}

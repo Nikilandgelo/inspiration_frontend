@@ -1,0 +1,143 @@
+dialog {
+    @include postioning(fixed, $top: 50%, $left: 50%);
+    @include set_size(40vw, 60vh);
+    @include flex_container(column, center, center, $wrap: nowrap);
+
+    @media screen and (max-width: 1599.98px) 
+    { @include set_size(43.5vw, 60vh); }
+
+    @media screen and (max-width: $large_breakpoint) 
+    { @include set_size(50vw, 60vh); }
+
+    @media screen and (max-width: $mini_large_breakpoint) 
+    { @include set_size(58vw, 60vh); }
+    
+    @media screen and (max-width: $tablets_breakpoint) 
+    { @include set_size(65vw, 60vh); }
+
+    @media screen and (max-width: $landscape_phones_breakpoint) 
+    { @include set_size(70vw, 55vh); }
+
+    @media screen and (max-width: $phones_breakpoint) 
+    { @include set_size(75vw, 50vh); }
+
+    @media screen and (max-width: 500px) 
+    { @include set_size(75vw, 45vh); }
+
+    @media screen and (max-width: 420px) 
+    { @include set_size(75vw, 42.5vh); }
+
+    @media screen and (max-width: 370px)
+    { @include set_size(80vw, 40vh); }
+
+
+    background-color: $main_color;
+    color: $background_color;
+    font-size: var(--text_content_font);
+    border-radius: var(--extended_border_radius);
+    padding: $min_v_margin $min_w_margin;
+    row-gap: $min_v_margin;
+    transform: translate(-50%, -50%) scale(0.75);
+    opacity: 0;
+    visibility: hidden;
+    transition: $main_sections_time ease-in-out;
+    z-index: 9999;
+}
+
+dialog::backdrop { 
+    backdrop-filter: blur(5px);
+    cursor: pointer;
+}
+
+.custom_backdrop {
+    @include postioning(fixed);
+    @include set_size(100vw, 100vh);
+
+    background-color: transparent;
+    z-index: -9999;
+    transition: $main_sections_time ease-in-out;
+}
+
+dialog[open] {
+    transform: translate(-50%, -50%) scale(1.0) !important;
+    opacity: 1;
+    visibility: visible;
+}
+
+dialog[open] ~ .custom_backdrop {
+    background-color: $popup_backdrop_color;
+    
+    // потому что сам dialog должен быть выше хотя бы на 1
+    z-index: 9998;
+}
+
+.close_full_view_icon {
+    position: relative;
+    left: 100%;
+    cursor: pointer;
+}
+
+#reviews_popup, #faq_popup { 
+    @include set_size(50vw, 75vh);
+
+    @media screen and (max-width: 1699.98px) 
+    { @include set_size(55vw, 75vh); }
+
+    @include grid_container(100%, max-content 1fr);
+
+    justify-items: center;
+
+    .close_full_view_icon { display: none; }
+
+    @media screen and (max-width: $large_breakpoint) {
+        @include set_size(100svw, 100svh);
+        @include postioning(fixed, $top: 100%);
+        @include grid_container(100%, max-content max-content 1fr);
+
+        border-radius: 0;
+        transform: none;
+
+        // на 1 больше чем другие dialog, чтоб поверх full_view_popup
+        z-index: 10000;
+
+        &[open] { transform: translateY(-100%) !important; }
+
+        .close_full_view_icon { 
+            display: block;
+            
+            // 50% так как justify-items: center;
+            left: 50% !important;
+        }
+    }
+}
+
+.popup_container { 
+    @include set_size;
+
+    overflow: hidden;
+    border-radius: var(--extended_border_radius);
+}
+
+
+#full_view_popup {
+    @include set_size(100vw, 100svh);
+    @include postioning(fixed, $left: 100%);
+
+    border-radius: 0 !important;
+    transform: none;
+    background-color: $main_color_popup;
+    backdrop-filter: blur(15px);
+    opacity: 1 !important;
+}
+
+#full_view_popup[open] { transform: translateX(-100%) !important; }
+
+#full_view_container {
+    @include set_size;
+    @include grid_container(100%, repeat(7, 1fr));
+
+    strong {
+        text-decoration: underline solid $background_color;
+        text-underline-position: under;
+    }
+}

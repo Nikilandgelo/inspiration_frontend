@@ -1,0 +1,158 @@
+#about_content {
+    font-size: var(--text_content_font);
+    
+    --card_notes_width: 70%;
+
+    @media screen and (max-width: $landscape_phones_breakpoint) 
+    { --card_notes_width: 100%; }
+
+    .left_text_about {
+        @include grid_container($grid_columns: 45% 1fr, $grid_rows: max-content);
+        
+        text-align: left;
+        margin-bottom: $mid_v_margin;
+    }
+
+    .about_section {
+        @media screen and (max-width: $tablets_breakpoint) {
+            @include grid_container($grid_columns: 100% !important, $grid_rows: max-content max-content !important);
+
+            text-align: left !important;
+            width: var(--card_notes_width);
+        }
+        
+        width: 100%;
+        gap: $min_v_margin $min_w_margin;
+
+        #about_languages {
+            @include flex_container(column);
+            
+            gap: $min_v_margin;
+            
+            div {
+                @include grid_container($grid_columns: max-content 1fr, $grid_rows: repeat(5, max-content));
+                
+                /* для текста вертикально по середине */
+                align-items: center;
+                
+                /* сначала row-gap, затем column-gap */
+                gap: $extra_min_v_margin $extra_min_w_margin;
+                
+                .about_language_flag {
+                    @include make_circle(var(--icon_size_width));
+
+                    border: $border-size solid $main_color;
+                }
+            }
+        }
+        
+        .about_photo {
+            @include set_size;
+
+            @media screen and (max-width: $tablets_breakpoint) 
+            { order: -1; }
+            
+            border-radius: var(--default_border_radius);
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+    
+    /* добавляется к about_card чтобы круг - radial-gradient был виден */
+    .active::after { opacity: 1 !important }
+    
+    .about_card {
+        @include flex_container(column, $align: center);
+
+        width: var(--card_notes_width);
+        padding: $min_v_margin $min_w_margin $min_v_margin $min_w_margin;
+        border-radius: var(--extended_border_radius);
+        background: linear-gradient(225deg, $contrast_color_opacity, $shadow_color);
+        gap: $extra_min_v_margin;
+        margin-bottom: $mid_v_margin;
+        position: relative;
+        
+        --circle_size: 0; --mouse_x: 0; --mouse_y: 0;
+        
+        * { pointer-events: none }
+
+        &::after {
+            @include set_size;
+            @include postioning;
+
+            content: '';
+            border-radius: var(--extended_border_radius);
+            background: radial-gradient(circle var(--circle_size) at var(--mouse_x) var(--mouse_y), $contrast_color_opacity, transparent);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity $main_sections_time;
+        }
+
+        #card_photo {
+            @include make_circle(11vw, $object_position: top);
+
+            @media screen and (max-width: $large_breakpoint) 
+            { @include make_circle(15vw, $object_position: top); }
+
+            @media screen and (max-width: $mini_large_breakpoint) 
+            { @include make_circle(18vw, $object_position: top); }
+
+            @media screen and (max-width: $tablets_breakpoint) 
+            { @include make_circle(20vw, $object_position: top); }
+
+            @media screen and (max-width: $landscape_phones_breakpoint) 
+            { @include make_circle(25vw, $object_position: top); }
+
+            @media screen and (max-width: $phones_breakpoint) 
+            { @include make_circle(30vw, $object_position: top); }
+
+            @media screen and (max-width: 420px) 
+            { @include make_circle(35vw, $object_position: top); }
+        }
+        
+        .about_text_card {
+            @include flex_container(column, $align: center);
+
+            background-color: $shadow_color;
+            border-radius: var(--extended_border_radius);
+            gap: $extra_min_v_margin;
+            padding: $extra_min_v_margin $extra_min_w_margin $extra_min_v_margin $extra_min_w_margin;
+
+            .quote_icon { width: var(--icon_size_width); }
+        }
+        
+        #card_prompt {
+            @include postioning(relative, $top: null, $bottom: $extra_min_v_margin);
+
+            font-size: var(--bigger_font);
+        }
+    }
+    
+    .verical_about_section {
+        @include grid_container($grid_columns: 100%, $grid_rows: max-content max-content 1fr);
+        
+        width: var(--card_notes_width);
+        justify-items: center;
+        row-gap: $min_v_margin;
+        margin-bottom: $mid_v_margin;
+
+        .about_illustr { 
+            width: 100%;
+            max-height: 50vh;
+        }
+    }
+    
+    .right_text_about { 
+        @include grid_container($grid_columns: 1fr 45%, $grid_rows: max-content);
+
+        text-align: right;
+
+        p {
+            white-space: pre-wrap;
+
+            @media screen and (max-width: $tablets_breakpoint) {
+                white-space: normal !important;
+            }
+        }
+    }
+}     

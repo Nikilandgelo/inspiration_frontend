@@ -1,0 +1,114 @@
+nav {
+    @include set_size(12%, 100vh);
+    @include postioning(fixed, $left: 88%);
+    @include grid_container(100%, max-content 1fr);
+    
+    /* чтобы тайтл был на уровне с надписями хедера, padding хедера + (высота хедера - его педдинги) / 2 чтобы была середина */
+    padding: calc( ( $min_v_margin + ( var(--height_header) - ($extra_min_v_margin * 2) ) / 2 ) )
+    $extra_min_w_margin $extra_min_v_margin;
+    border-left: $border-size solid transparent;
+    border-image-slice: 1 !important;
+    gap: $min_v_margin;
+    background-color: $main_color_inactive;
+    backdrop-filter: blur($blur_size);
+    z-index: 1;
+
+    .roadmap_title { font-size: var(--bigger_font) }
+
+    .last_roadmap_title {color: $background_color}
+
+    #divs_roadmap {
+        /* так как у последнего дива нет линии, значит он на 50% меньше других 4 дивов, 22.25 * 4 == 89, последний 11%, что практически половина 22.25% */
+        @include grid_container(100%, repeat(4, 22.25%) 1fr);
+        
+        overflow: hidden
+    }
+    
+    .roadmap_div {
+        @include grid_container(100%, repeat(2, 50%));
+        
+        justify-items: center;
+        overflow: hidden
+    }
+    
+    .last_roadmap { @include grid_container(100%, 100%) }
+    
+    .last_roadmap_wrapper {
+        &::after {
+            background-color: $background_color_inactive !important;
+        }
+    }
+    
+    .roadmap_wrapper {
+        @include flex_container(column, $align: center, $wrap: nowrap);
+
+        min-width: 75%;
+        max-width: max-content;
+        gap: $super_min_v_margin;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        padding: $super_min_v_margin $super_min_w_margin $super_min_v_margin $super_min_w_margin;
+
+        --pseudo_transform_value: null;
+        --pseudo_border_radius_value: null;
+
+        &::after {
+            @include set_size;
+            @include postioning;
+
+            content: '';
+            background-color: $main_color_inactive;
+            z-index: -1;
+            transform: var(--pseudo_transform_value);
+            border-radius: var(--pseudo_border_radius_value);
+        }
+        
+        .roadmap_bulb { transform: scale(0.9); }
+
+        .last_bulb { 
+            fill: $background_color;
+            stroke: $background_color; 
+        }
+        
+        .roadmap_bulb path { transition: $fixed_transition_time }
+        
+        .current_lines { fill: transparent }
+        
+        .bulb_filler { 
+            fill: transparent; 
+            stroke-width: 0%
+        }
+        
+        .current_fill { stroke-width: 150% }
+        
+        .roadmap_text { font-size: var(--smaller_font); }
+
+        .last_roadmap_text { color: $background_color}
+    }
+    
+    .roadmap_lines {
+        @include set_size;
+
+        --stroke_opacity: 15%;
+
+        stroke-width: $border-size;
+        stroke-dasharray: 4px;
+        stroke-linecap: round;
+
+        line {
+            stroke: color($p3_main / var(--stroke_opacity));
+            transition: stroke $fixed_transition_time;
+        }
+
+        .last_line {
+            stroke: color($p3_background / var(--stroke_opacity));
+        }
+    }
+    
+    .roadmap_passed_lines { --stroke_opacity: 100% !important }
+    
+    @media screen and (max-width: $large_breakpoint) {
+        display: none
+    }
+}
