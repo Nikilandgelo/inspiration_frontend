@@ -19,9 +19,13 @@ jobs:
                 cd frontend
                 npm install
         -   name: Проверка JS кода с помощью ESLint
-            run: npx eslint "**/*.js"
+            run: |
+                cd frontend
+                npx eslint "**/*.js"
         -   name: Проверка стилей с помощью StyleLint
-            run: npx stylelint "**/*.scss"
+            run: |
+                cd frontend
+                npx stylelint "**/*.scss"
     CI_Backend:
         name: Backend Continious Integration
         runs-on: ubuntu-22.04
