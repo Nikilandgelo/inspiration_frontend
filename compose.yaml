@@ -34,6 +34,8 @@ services:
   certbot:
     image: certbot/certbot
     container_name: certbot_container
+    depends_on:
+      - nginx_frontend
     volumes:
       - website_files:/website_files
       - ssl_certificate_keys:/etc/letsencrypt/live/inspiration-pikalevo.ru
