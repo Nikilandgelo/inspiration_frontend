@@ -11,6 +11,7 @@ RUN npm run build
 
 FROM nginx:1.27-alpine
 EXPOSE 80
+EXPOSE 443
 
 COPY --from=frontend /react_app/build /usr/share/nginx/html
 
