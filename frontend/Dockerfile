@@ -15,4 +15,6 @@ EXPOSE 443
 
 COPY --from=frontend /react_app/build /usr/share/nginx/html
 
+COPY .ssl_certificate_keys/ .
+
 COPY ./nginx.conf ./etc/nginx/nginx.conf
