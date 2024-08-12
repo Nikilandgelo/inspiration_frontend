@@ -16,7 +16,3 @@ EXPOSE 443
 
 COPY --from=frontend /react_app/build /usr/share/nginx/html
 COPY ./nginx.conf ./etc/nginx/nginx.conf
-COPY ./ssl_nginx/ ./ssl_nginx/
-COPY ./wait_for_ssl.sh .
-
-ENTRYPOINT ./wait_for_ssl.sh
