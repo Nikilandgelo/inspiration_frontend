@@ -3,6 +3,7 @@ networks:
 
 volumes:
   website_files:
+  ssl_certificate_keys:
 
 services:
   
@@ -17,6 +18,7 @@ services:
     restart: unless-stopped
     volumes:
       - website_files:/usr/share/nginx/html
+      - ssl_certificate_keys:/ssl_certificate_keys:ro
 
   backend:
     build: ./mini_backend
@@ -34,9 +36,11 @@ services:
     container_name: certbot_container
     volumes:
       - website_files:/website_files
+      - ssl_certificate_keys:/etc/letsencrypt/live/inspiration-pikalevo.ru
     entrypoint: >-
       certbot certonly --webroot 
       --webroot-path /website_files 
       -d inspiration-pikalevo.ru
-      --email niki_landgelo@outlook.com
+      --email peppi_4ulok@mail.ru
       --agree-tos
+      --non-interactive
