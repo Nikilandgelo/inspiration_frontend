@@ -1,10 +1,11 @@
 FROM node:22-alpine AS frontend
 WORKDIR /react_app
 
-COPY package*.json .
+COPY *.json .
 RUN npm install
 
-COPY . .
+COPY ./public/ ./public/
+COPY ./src/ ./src/
 RUN npm run build
 
 
@@ -14,7 +15,8 @@ EXPOSE 80
 EXPOSE 443
 
 COPY --from=frontend /react_app/build /usr/share/nginx/html
-
-COPY .ssl_certificate_keys/ .
-
 COPY ./nginx.conf ./etc/nginx/nginx.conf
+COPY ./ssl_nginx/ ./ssl_nginx/
+COPY ./wait_for_ssl.sh .
+
+ENTRYPOINT ./wait_for_ssl.sh
