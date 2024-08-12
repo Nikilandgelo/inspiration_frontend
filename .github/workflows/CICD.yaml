@@ -57,5 +57,5 @@ jobs:
             run: |
                 ssh ${{ secrets.NAME_ON_SERVER }}@${{ secrets.SERVER_IP }} << 'COMMANDS'
                 cd inspiration_frontend
-                git pull remote main
+                git pull origin main
                 COMMANDS
