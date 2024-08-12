@@ -11,9 +11,7 @@ jobs:
             with:
                 repository: Nikilandgelo/inspiration_frontend
         -   name: Установка NodeJS
-            uses: actions/setup-node@v4
-            with:
-                node-version: 22.3.0
+            uses: actions/setup-node@v4.0.3
         -   name: Установка зависимостей
             run: |
                 cd frontend
@@ -42,3 +40,22 @@ jobs:
                 pip install -r requirements.txt
         -   name: Проверка кода на синтаксические ошибки линтером flake8
             run: flake8 . --exclude=venv/
+    CD:
+        name: Continious Delivery
+        runs-on: ubuntu-22.04
+        needs:
+            - CI_Frontend
+            - CI_Backend
+        steps:
+        -   name: Создание и настройка SSH папки внутри юзера runner
+            run: |
+                mkdir ~/.ssh
+                echo "${{ secrets.PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
+                chmod 700 ~/.ssh/id_rsa
+                ssh-keyscan ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+        -   name: Подключение через SSH, обновление репозитория на сервере
+            run: |
+                ssh ${{ secrets.NAME_ON_SERVER }}@${{ secrets.SERVER_IP }} << 'COMMANDS'
+                cd inspiration_frontend
+                git pull remote main
+                COMMANDS

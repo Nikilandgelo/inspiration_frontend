@@ -1,6 +1,9 @@
 networks:
   inspiration_network:
 
+volumes:
+  website_files:
+
 services:
   
   nginx_frontend:
@@ -10,6 +13,10 @@ services:
       - inspiration_network
     ports:
       - 80:80
+      - 443:443
+    restart: unless-stopped
+    volumes:
+      - website_files:/usr/share/nginx/html
 
   backend:
     build: ./mini_backend
@@ -20,5 +27,16 @@ services:
       - inspiration_network
     depends_on:
       - nginx_frontend
-    
-# restart: unless-stopped
+    restart: unless-stopped
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot_container
+    volumes:
+      - website_files:/website_files
+    entrypoint: >-
+      certbot certonly --webroot 
+      --webroot-path /website_files 
+      -d inspiration-pikalevo.ru
+      --email niki_landgelo@outlook.com
+      --agree-tos
