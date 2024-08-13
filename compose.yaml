@@ -13,7 +13,8 @@ services:
       - 443:443
     restart: unless-stopped
     volumes:
-      - ./lets_encrypt_test:/usr/share/nginx/html
+      - ./lets_encrypt_test:/usr/share/nginx/html/certbot
+      - ../../etc/letsencrypt/:/etc/letsencrypt/:ro
 
   backend:
     build: ./mini_backend
