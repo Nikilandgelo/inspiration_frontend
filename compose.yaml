@@ -1,10 +1,6 @@
 networks:
   inspiration_network:
 
-volumes:
-  website_files:
-  ssl_certificate_keys:
-
 services:
   
   nginx_frontend:
@@ -17,8 +13,7 @@ services:
       - 443:443
     restart: unless-stopped
     volumes:
-      - website_files:/usr/share/nginx/html
-      - ssl_certificate_keys:/ssl_certificate_keys:ro
+      - ./lets_encrypt_test:/usr/share/nginx/html
 
   backend:
     build: ./mini_backend
@@ -30,19 +25,3 @@ services:
     depends_on:
       - nginx_frontend
     restart: unless-stopped
-
-  certbot:
-    image: certbot/certbot
-    container_name: certbot_container
-    depends_on:
-      - nginx_frontend
-    volumes:
-      - website_files:/website_files
-      - ssl_certificate_keys:/etc/letsencrypt/live/inspiration-pikalevo.ru
-    entrypoint: >-
-      certbot certonly --webroot 
-      --webroot-path /website_files 
-      -d inspiration-pikalevo.ru
-      --email peppi_4ulok@mail.ru
-      --agree-tos
-      --non-interactive
