@@ -1,5 +1,4 @@
-networks:
-  inspiration_network:
+name: inspiration_fullstack
 
 services:
   
@@ -9,20 +8,98 @@ services:
     networks:
       - inspiration_network
     ports:
-      - 80:80
-      - 443:443
+      - "80:80"
+      - "443:443"
     restart: unless-stopped
     volumes:
       - ./lets_encrypt_test:/usr/share/nginx/html/certbot
-      - ../../etc/letsencrypt/:/etc/letsencrypt/:ro
+      - /etc/letsencrypt/:/etc/letsencrypt/:ro
 
   backend:
     build: ./mini_backend
     container_name: backend_container
     env_file:
       - ./.env
+    entrypoint: ["python", "-m", "mini_backend"]
     networks:
       - inspiration_network
     depends_on:
       - nginx_frontend
     restart: unless-stopped
+
+
+
+  node-exporter:
+    image: prom/node-exporter
+    container_name: node_exporter_container
+    ports:
+      - "9100:9100"
+    restart: unless-stopped
+    volumes:
+      - "/:/host:ro"
+    command:
+      - "--path.rootfs=/host"
+    networks:
+      - inspiration_network
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus_container
+    ports:
+      - "9090:9090"
+    restart: unless-stopped
+    volumes:
+      - prometheus_data:/prometheus
+      - ./grafana/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - inspiration_network
+
+
+
+  promtail:
+    image: grafana/promtail
+    container_name: promtail_container
+    ports:
+      - "9080:9080"
+    volumes:
+      - ./grafana/promtail.yaml:/etc/promtail/promtail.yaml
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: ["-config.file=/etc/promtail/promtail.yaml"]
+    restart: unless-stopped
+    networks:
+      - inspiration_network
+
+  loki:
+    image: grafana/loki
+    container_name: loki_container
+    ports:
+      - "3100:3100"
+    restart: unless-stopped
+    networks:
+      - inspiration_network
+
+
+
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana_container
+    env_file:
+      - ./.env
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    volumes:
+      - grafana_storage:/var/lib/grafana
+      - ./grafana/datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
+    networks:
+      - inspiration_network
+
+
+networks:
+  inspiration_network:
+
+volumes:
+  grafana_storage:
+  prometheus_data:
