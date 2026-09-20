@@ -16,7 +16,7 @@ services:
       - /etc/letsencrypt/:/etc/letsencrypt/:ro
 
   backend:
-    build: ./mini_backend
+    build: mini_backend(OLD)
     container_name: backend_container
     env_file:
       - ./.env

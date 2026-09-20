@@ -24,22 +24,22 @@ jobs:
             run: |
                 cd frontend
                 npx stylelint "**/*.scss"
-    CI_Backend:
-        name: Backend Continious Integration
-        runs-on: ubuntu-22.04
-        steps:
-        -   name: Установка репозитория
-            uses: actions/checkout@v4
-            with:
-                repository: Nikilandgelo/inspiration_frontend
-        -   name: Установка Python
-            uses: actions/setup-python@v5.1.1
-        -   name: Установка зависимостей
-            run: |
-                cd mini_backend
-                pip install -r requirements.txt
-        -   name: Проверка кода на синтаксические ошибки линтером flake8
-            run: flake8 . --exclude=venv/
+#    CI_Backend:
+#        name: Backend Continious Integration
+#        runs-on: ubuntu-22.04
+#        steps:
+#        -   name: Установка репозитория
+#            uses: actions/checkout@v4
+#            with:
+#                repository: Nikilandgelo/inspiration_frontend
+#        -   name: Установка Python
+#            uses: actions/setup-python@v5.1.1
+#        -   name: Установка зависимостей
+#            run: |
+#                cd mini_backend
+#                pip install -r requirements.txt
+#        -   name: Проверка кода на синтаксические ошибки линтером flake8
+#            run: flake8 . --exclude=venv/
 #    CD:
 #        name: Continious Delivery
 #        runs-on: ubuntu-22.04
