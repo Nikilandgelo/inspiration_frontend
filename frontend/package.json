@@ -2,6 +2,7 @@
   "name": "inspiration",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "proxy": "http://localhost:8080/",
   "dependencies": {
     "@yandex/smart-captcha": "2.9.1",
