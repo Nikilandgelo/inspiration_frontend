@@ -50,7 +50,9 @@ export default function Footer() {
                     <img src={contact_location} loading="lazy"/>
                 </div>
 
-                <strong id="author">2024 | © <a href="https://t.me/niki_landgelo" className="underlink">Selivanov Nikita</a>
+                <strong id="author">
+                    {new Date().getFullYear()} | &copy;&nbsp;
+                    <a href="https://t.me/niki_landgelo" className="underlink">Selivanov Nikita</a>
                 </strong>
 
             </div>

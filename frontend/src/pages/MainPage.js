@@ -80,7 +80,14 @@ export default function MainPage()
             </motion.svg>
         </div>
 
-        <iframe src="https://fast.wistia.net/embed/iframe/e8dgnqe0aw?seo=true&videoFoam=false" title="Inspiration_background Video" allow="autoplay; fullscreen" className="main_bg video_background" name="wistia_embed" loading="lazy"/>
+        <iframe
+            src="https://fast.wistia.net/embed/iframe/e8dgnqe0aw?seo=false&videoFoam=false&autoPlay=true&muted=true&endVideoBehavior=loop&controlsVisibleOnLoad=false"
+            title="Inspiration_background Video"
+            allow="autoplay; fullscreen"
+            className="main_bg video_background"
+            name="wistia_embed"
+            loading="lazy"
+        />
         <img className='main_bg frame_video_bg' src={poster}/>
     </>
     );

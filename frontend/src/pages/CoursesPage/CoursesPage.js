@@ -2,15 +2,24 @@ import { Context } from 'src/context'
 import { useContext, useRef, useState } from 'react'
 import PhoneInput, { isPossiblePhoneNumber, formatPhoneNumber } from 'react-phone-number-input/input'
 import { motion } from 'framer-motion'
+import { InvisibleSmartCaptcha  } from '@yandex/smart-captcha';
+
+
+const API_GATEWAY= 'https://d5dhc2qok798ffnh3ktu.0ly8ed4d.apigw.yandexcloud.net'
 
 
 export default function CoursesPage()
 {
     const { set_popup_showing, popup_ids } = useContext(Context)
+
     const [phone_value, set_phone_value] = useState('')
     const [invalid_fio, set_invalid_fio] = useState(false)
     const [invalid_phone, set_invalid_phone] = useState(false)
     const fio_value = useRef(null)
+
+    const pending_lead = useRef(null) // form data captured at submit time
+    const [captcha_visible, set_captcha_visible] = useState(false)
+    const [is_sending, set_is_sending] = useState(false)
     
     const regex_for_full_name = /^[А-Яа-яЁё]+ [А-Яа-яЁё]+ [А-Яа-яЁё]+$/
     const label_variants = {
@@ -23,7 +32,41 @@ export default function CoursesPage()
             "--pseudo_opacity_value": 1
         }
     }
-    
+
+    const show_popup = (popup_id) => {
+        document.querySelector(`#${popup_id}`).showModal()
+        set_popup_showing(true)
+    }
+
+    const send_lead = async (captcha_token) => {
+        set_is_sending(true)
+        try {
+            const response = await fetch(API_GATEWAY + '/api/message', {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    ...pending_lead.current,
+                    'captcha_token': captcha_token
+                })
+            })
+            show_popup(response.ok ? popup_ids.CoursesPageSuccess : popup_ids.CoursesPageError)
+        } catch {
+            show_popup(popup_ids.CoursesPageError)
+        } finally {
+            set_is_sending(false)
+        }
+    }
+
+    const handle_captcha_success = (token) => {
+        set_captcha_visible(false)  // reset
+        send_lead(token)
+    }
+
+    const handle_captcha_error = () => {
+        set_captcha_visible(false)  // reset
+        show_popup(popup_ids.CoursesPageError)
+    }
+
     return (
         <form id="courses_page_form" 
         onSubmit={ async (event) => {
@@ -37,20 +80,14 @@ export default function CoursesPage()
                 return
             }
 
-            let response = await fetch('/api/message', {
-                method: "POST",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    'full_name': fio_value.current.value,
-                    'phone_number': formatPhoneNumber(phone_value)
-                })
-            })
-
-            let popup = document.querySelector(`#${response.status === 201 ? popup_ids.CoursesPageSuccess : popup_ids.CoursesPageError}`)
-            popup.showModal()
-            set_popup_showing(true)
+            pending_lead.current = {
+                'full_name': fio_value.current.value,
+                'phone_number': formatPhoneNumber(phone_value)
+            }
+            set_captcha_visible(true) // starts the check, result arrives in onSuccess
         } }>
-            <p>Мы позвоним вам, определим ваш уровень языковых навыков и подберем подходящий для вас курс, а также ответим на все интересующие вопросы.</p>
+            <p>Мы позвоним вам, определим ваш уровень языковых навыков и подберем подходящий для вас курс, а также ответим на все интересующие вопросы.
+            </p>
 
             <motion.label
             variants={label_variants}
@@ -89,6 +126,17 @@ export default function CoursesPage()
             transition={ {duration: 0.025, ease: "easeOut"} }>
                 <strong>Оставить заявку</strong>
             </motion.button>
+
+            <InvisibleSmartCaptcha
+                sitekey='ysc1_ofNSkRSsHk2LilVh1LwHTV7GYWFesap5cxftxPE518eb84b0'  // public, safe to keep in the bundle
+                visible={captcha_visible}
+                language="ru"
+                hideShield={true}
+                onSuccess={handle_captcha_success}
+                onChallengeHidden={() => set_captcha_visible(false)}
+                onNetworkError={handle_captcha_error}
+                onJavascriptError={handle_captcha_error}
+            />
         </form>
     )
 }
