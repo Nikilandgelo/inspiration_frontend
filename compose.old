@@ -15,19 +15,6 @@ services:
       - ./lets_encrypt_test:/usr/share/nginx/html/certbot
       - /etc/letsencrypt/:/etc/letsencrypt/:ro
 
-  backend:
-    build: mini_backend(OLD)
-    container_name: backend_container
-    env_file:
-      - ./.env
-    entrypoint: ["python", "-m", "mini_backend"]
-    networks:
-      - inspiration_network
-    depends_on:
-      - nginx_frontend
-    restart: unless-stopped
-
-
 
 #  node-exporter:
 #    image: prom/node-exporter
