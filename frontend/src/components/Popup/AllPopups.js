@@ -20,6 +20,7 @@ export default function AllPopups() {
     const reviews_id = 'reviews_popup'
     const faq_id = 'faq_popup'
     const full_view_id = 'full_view_popup'
+    const not_using_var = "not_using_var"
     
     return (
         <>
