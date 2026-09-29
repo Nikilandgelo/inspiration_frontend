@@ -3,7 +3,7 @@ This project was developed for a local organization called **"Inspiration"**, wi
 and responsive landing website designed to attract new visitors and potential customers.
 
 [![Website](https://img.shields.io/website?url=https%3A%2F%2Finspiration-pikalevo.ru%2F&up_message=online&down_message=offline&style=for-the-badge&labelColor=blue)](https://inspiration-pikalevo.ru/)
-[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Nikilandgelo/inspiration_frontend/CICD.yaml?style=for-the-badge&logo=githubactions&logoColor=black&label=CI%2FCD&labelColor=blue)](https://github.com/Nikilandgelo/inspiration_frontend/actions)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Nikilandgelo/inspiration_frontend/CI.yaml?style=for-the-badge&logo=githubactions&logoColor=black&label=CI%2FCD&labelColor=blue)](https://github.com/Nikilandgelo/inspiration_frontend/actions)
 
 ## Key Features
 - **Responsive Frontend**: Built with [`React`](https://react.dev/), leveraging [`Motion Framer`](https://www.framer.com/motion/) for smooth animations and [`Swiper`](https://swiperjs.com/) for interactive carousels. The design is fully responsive, ensuring an optimal user experience on mobile, tablet, and desktop devices.

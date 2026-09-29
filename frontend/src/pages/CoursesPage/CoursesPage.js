@@ -71,10 +71,13 @@ export default function CoursesPage()
         <form id="courses_page_form" 
         onSubmit={ async (event) => {
             event.preventDefault()
+            if (is_sending || captcha_visible) return
+
             if (!regex_for_full_name.test(fio_value.current.value)) {
                 set_invalid_fio(true)
                 return
             }
+
             if (!isPossiblePhoneNumber(phone_value, "RU")) {
                 set_invalid_phone(true)
                 return
@@ -122,9 +125,10 @@ export default function CoursesPage()
             </motion.label>
 
             <motion.button
+            disabled={is_sending}
             whileTap={ { scale: 0.98 } }
             transition={ {duration: 0.025, ease: "easeOut"} }>
-                <strong>Оставить заявку</strong>
+                <strong>{is_sending ? "Отправка..." : "Оставить заявку"}</strong>
             </motion.button>
 
             <InvisibleSmartCaptcha
